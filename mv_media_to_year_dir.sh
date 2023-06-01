@@ -122,7 +122,7 @@ for ((year = yearnow; year >= 1990; year--)); do
   echo $year_directory
     find "$directory" -maxdepth 1 -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.tiff" -o -iname "*.heic" -o -iname "*.mp4" -o -iname "*.mov" -o -iname "*.avi" -o -iname "*.mkv" \) -newermt "$year-01-01" ! -newermt $((year + 1))-01-01 | head -n 100
   else
-    find "$directory" -maxdepth 1 -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.tiff" -o -iname "*.heic" -o -iname "*.mp4" -o -iname "*.mov" -o -iname "*.avi" -o -iname "*.mkv" \) -newermt "$year-01-01" ! -newermt $((year + 1))-01-01 -exec rsync -a {} "$year_directory/" \;
+    find "$directory" -maxdepth 1 -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.tiff" -o -iname "*.heic" -o -iname "*.mp4" -o -iname "*.mov" -o -iname "*.avi" -o -iname "*.mkv" \) -newermt "$year-01-01" ! -newermt $((year + 1))-01-01 -exec rsync -a --remove-source-files {} "$year_directory/" \;
  find "$directory" -type d -empty -delete
  fi
 done
